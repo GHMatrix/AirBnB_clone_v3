@@ -16,7 +16,7 @@ def api_status():
 @app_views.route('/api/v1/stats', methods=['GET'])
 def get_stats():
     """Retrieve the number of objects by type."""
-    if request.method == 'GET':
+    if request.method == "GET":
         stats = {}
         classes = {
             "Amenity": "amenities",
