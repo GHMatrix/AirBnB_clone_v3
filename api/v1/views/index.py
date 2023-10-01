@@ -2,14 +2,15 @@
 '''index module'''
 
 from api.v1.views import app_views
-from flask import jsonify
+from flask import jsonify, request
 from models import storage
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def api_status():
     '''returns the status code'''
-    return jsonify({"status": "OK"})
+    if request.method == 'GET':
+        return jsonify({"status": "OK"})
 
 
 @app_views.route('/api/v1/stats', methods=['GET'])
