@@ -16,11 +16,16 @@ def api_status():
 @app_views.route('/api/v1/stats', methods=['GET'])
 def get_stats():
     """Retrieve the number of objects by type."""
-    classes = ["User", "Place", "City", "Amenity", "Review", "State"]
-    stats = {}
-
-    for cls_name in classes:
-        cls = getattr(storage.all(), cls_name)
-        stats[cls_name] = storage.count(cls)
-
-    return jsonify(stats)
+    if request.method == 'GET':
+        stats = {}
+        classes = {
+            "Amenity": "amenities",
+            "City": "cities",
+            "Place": "places",
+            "Review": "reviews",
+            "State": "states",
+            "User": "users"
+        }
+        for cls_name, cls_value in classes.items():
+            stats[cls_value] = storage.count(cls_name)
+        return jsonify(stats)
