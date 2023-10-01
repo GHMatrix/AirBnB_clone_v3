@@ -17,7 +17,6 @@ CORS(app, resources={'/*': {'origins': app_host}})
 =======
 app.register_blueprint(app_views)
 
-
 @app.teardown_appcontext
 def teardown(exception):
     storage.close()
