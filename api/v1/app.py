@@ -3,7 +3,7 @@
 
 import os
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 
@@ -19,9 +19,10 @@ def teardown(exception):
 @app.errorhandler(404)
 def not_found_error(error):
     '''Handling 404 HTTP error code.'''
-    response = jsonify({"error": "Not found"})
-    response.status_code = 404
-    return response
+    code = error.__str__().split()[0]
+    description = error.description
+    message = {'error': description}
+    return make_response(jsonify(message), code)
 
 
 if __name__ == "__main__":
