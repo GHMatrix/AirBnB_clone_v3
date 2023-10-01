@@ -17,13 +17,15 @@ def api_status():
 def get_stats():
     """Retrieve the number of objects by type."""
     if request.method == 'GET':
-        classes = {"User": 'users', "Place": 'places',
-                   "City": 'cities', "Amenity": 'amenities',
-                   "Review": 'reviews', "State": 'states'}
         stats = {}
-
-        for cls_name, value in classes:
-            cls = getattr(storage.all(), cls_name)
-            stats[value] = storage.count(cls)
-
+        classes = {
+            "Amenity": "amenities",
+            "City": "cities",
+            "Place": "places",
+            "Review": "reviews",
+            "State": "states",
+            "User": "users"
+        }
+        for cls_name, cls_value in classes.items():
+            stats[cls_value] = storage.count(cls_name)
         return jsonify(stats)
