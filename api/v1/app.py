@@ -3,7 +3,7 @@
 
 import os
 
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 
@@ -16,7 +16,7 @@ def teardown(exception):
     storage.close()
 
 
-@app.errorhandler(error)
+@app.errorhandler(404)
 def not_found_error(error):
     '''Handling 404 HTTP error code.'''
     response = jsonify({"error": "Not found"})
