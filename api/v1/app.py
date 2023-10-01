@@ -16,10 +16,12 @@ def teardown(exception):
     storage.close()
 
 
-@app.errorhandler(404)
-def error_404(error):
+@app.errorhandler(error)
+def not_found_error(error):
     '''Handling 404 HTTP error code.'''
-    return jsonify(error='Not found'), 404
+    response = jsonify({"error": "Not found"})
+    response.status_code = 404
+    return response
 
 
 if __name__ == "__main__":
