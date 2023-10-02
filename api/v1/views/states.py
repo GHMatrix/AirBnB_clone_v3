@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Defines the API actions for State objects."""
-from flask import Flask, request, jsonify, abort
+from flask import Flask, request, jsonify, abort, make_response
 from models import storage
 from models.state import State
 from api.v1.views import app_views
@@ -47,7 +47,7 @@ def create_state():
         abort(400, 'Missing name')
     new_state = State(**data)
     new_state.save()
-    return jsonify(new_state.to_dict()), 201
+    return make_response(jsonify(new_state.to_dict()), 201)
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
@@ -67,7 +67,3 @@ def update_state(state_id):
 
     storage.save()
     return jsonify(state.to_dict())
-
-
-if __name__ == '__main__':
-    pass
