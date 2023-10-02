@@ -139,7 +139,8 @@ def places_search():
         places = [place for place in places.values()]
 
     if request_body.get('amenities'):
-        obj_am = [storage.get(Amenity, id) for id in request_body.get('amenities')]
+        obj_am = [storage.get(Amenity, id) for id in
+                  request_body.get('amenities')]
         i = 0
         limit = len(places)
         HBNB_API_HOST = getenv('HBNB_API_HOST')
