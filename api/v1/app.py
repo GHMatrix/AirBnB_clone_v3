@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-'''api app module script'''
+'''api app module'''
+
 
 import os
-
 from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
